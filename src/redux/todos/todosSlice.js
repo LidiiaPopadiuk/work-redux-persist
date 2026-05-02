@@ -6,7 +6,10 @@ import { nanoid } from "nanoid";
 const todosSlice = createSlice({
   name: "todos",
 
-  initialState: [],
+  initialState: [{ id: 1, completed: false, text: "qwe" },
+    { id: 2, completed: true, text: "asd" },
+    { id: 3, completed: false, text: "zxc" }
+  ],
 
   reducers: {
     addTodo: {
