@@ -12,6 +12,6 @@ export const neededTodos = (state) => {
     } else if (state.filter === "Active") {
           return activeTodos(state)
     } else {
-          return state.todos
+          return state.todos.todos
     }
 }

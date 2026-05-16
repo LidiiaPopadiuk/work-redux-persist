@@ -12,20 +12,24 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { combineReducers } from "redux";
 
 const persistConfig = {
   key: "todos",
   storage,
+  whitelist: ["todos"],  //! whitelist - масив полів які ми хочемо попавати в локалсторедж, запрошені
 };
 
-const persistedReducer = persistReducer(persistConfig, todosReducer);
+const rootReducer = combineReducers({
+  todos: todosReducer,
+  filter: filterReducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    todos: persistedReducer,
-    filter: filterReducer,
-  },
-  middleware: (getDefaultMiddleware) =>
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
