@@ -1,9 +1,9 @@
 export const activeTodos = (state) => {
-    return state.todos.filter(todo => todo.completed === false)
+    return state.todos.todos.filter(todo => todo.completed === false)
 };  
 
 export const completedTodos = (state) => {
-    return state.todos.filter(todo => todo.completed === true)
+    return state.todos.todos.filter(todo => todo.completed === true)
 };  
 
 export const neededTodos = (state) => {

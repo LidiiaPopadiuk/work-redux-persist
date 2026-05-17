@@ -4,6 +4,8 @@ import { selectTodos } from "redux/todos/todosSelectors";
 
 export const TaskCounter = () => {
   const tasks = useSelector(selectTodos);
+  console.log("tasks", tasks);
+  
   const activeTasks = tasks.filter(task => !task.completed);
   const completedTasks = tasks.filter(task => task.completed);
   return (
