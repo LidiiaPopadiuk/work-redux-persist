@@ -2,10 +2,10 @@ import { Task } from "components/Task/Task";
 import css from "./TaskList.module.css";
 import { useSelector } from "react-redux";
 import { selectTodos } from "redux/todos/todosSelectors";
-import { neededTodos } from 'redux/filter/filterSelectors'
+import { selectNeededTodos } from 'redux/filter/filterSelectors'
 
 export const TaskList = () => {
-  const tasks = useSelector(neededTodos);
+  const tasks = useSelector(selectNeededTodos);
   
   console.log(tasks);
   return (

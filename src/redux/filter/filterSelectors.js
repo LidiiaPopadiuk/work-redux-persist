@@ -1,17 +1,50 @@
-export const activeTodos = (state) => {
-    return state.todos.todos.filter(todo => todo.completed === false)
-};  
+import { createSelector } from "@reduxjs/toolkit";
 
-export const completedTodos = (state) => {
-    return state.todos.todos.filter(todo => todo.completed === true)
-};  
+// export const activeTodos = state => {
+//   console.log(state);
+//   return state.todos.todos.filter(todo => todo.completed === false);
+// };
 
-export const neededTodos = (state) => {
-    if (state.filter === "Completed") {
-          return completedTodos(state)
-    } else if (state.filter === "Active") {
-          return activeTodos(state)
+// export const completedTodos = state => {
+//   console.log(state);
+//   return state.todos.todos.filter(todo => todo.completed === true);
+// };
+
+// export const neededTodos = state => {
+//   console.log(state);
+//   if (state.filter === "Completed") {
+//     return completedTodos(state);
+//   } else if (state.filter === "Active") {
+//     return activeTodos(state);
+//   } else {
+//     return state.todos.todos;
+//   }
+// };
+
+const selectTodos = state => state.todos.todos;
+const selectFilter = state => state.filter;
+export const selectNeededTodos = createSelector(
+  [selectTodos, selectFilter],
+  (todos, filter) => {
+    console.log("mark")
+    if (filter === "Completed") {
+      return todos.filter(todo => todo.completed === true);
+    } else if (filter === "Active") {
+      return todos.filter(todo => todo.completed === false);
     } else {
-          return state.todos.todos
+      return todos;
     }
-}
+  }
+);
+
+// export const selectActiveTodos = createSelector(
+//   [
+//     // Pass input selectors with typed arguments
+//     (state: RootState) => state.todos.todos,
+//     (state: RootState, category: string) => category
+//   ],
+//   // Extracted values are passed to the result function for recalculation
+//   (todos, category) => {
+//     return todos.filter(t => t.category === category)
+//   }
+// )
