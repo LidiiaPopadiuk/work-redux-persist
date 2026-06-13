@@ -114,16 +114,31 @@ const todosSlice = createSlice({
       state.error = action.payload;
     });
 
-    builder.addCase(updateTodo.pending, state => {
-      state.loading = true;
-    });
-    builder.addCase(updateTodo.fulfilled, (state, action) => {
-      state.todos = state.todos.map(todo => {
-        if (todo.id === action.payload.id) {
-          const newObj = { ...todo, text: action.payload.text };
-          console.log("newObj", newObj);
+    // builder.addCase(updateTodo.pending, state => {
+    //   state.loading = true;
+    // });
+    // builder.addCase(updateTodo.fulfilled, (state, action) => {
+    //   state.todos = state.todos.map(todo => {
+    //     if (todo.id === action.payload.id) {
+    //       const newObj = { ...todo, text: action.payload.text };
+    //       console.log("newObj", newObj);
           
-          return newObj;
+    //       return newObj;
+    //     }
+    //     return todo
+    //   });
+    //   state.loading = false;
+    // });
+    // builder.addCase(updateTodo.rejected, (state, action) => {
+    //   state.loading = false;
+    //   state.error = action.payload;
+    // });
+
+
+    builder.addCase(updateTodo.fulfilled, (state, action) => {
+     state.todos = state.todos.map(todo => {
+        if (todo.id === action.payload.id) {
+          return action.payload;
         }
         return todo
       });
@@ -132,6 +147,9 @@ const todosSlice = createSlice({
     builder.addCase(updateTodo.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
+    });
+    builder.addCase(updateTodo.pending, state => {
+      state.loading = true;
     });
   },
 });

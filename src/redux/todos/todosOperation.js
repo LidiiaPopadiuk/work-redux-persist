@@ -65,11 +65,24 @@ export const changeTodos = createAsyncThunk(
   }
 );
 
+// export const updateTodo = createAsyncThunk(
+//   "todos/updateTodo",
+//   async (updatedTodo, thunkAPI) => {
+//     try {
+//       const response = await axios.put(`/todos/${updatedTodo.id}`, updatedTodo);
+//       const data = response.data;
+//       return data;
+//     } catch (err) {
+//       return thunkAPI.rejectWithValue(err.massage);
+//     }
+//   }
+// );
+
 export const updateTodo = createAsyncThunk(
   "todos/updateTodo",
-  async (updatedTodo, thunkAPI) => {
+  async (updatedTask, thunkAPI) => {
     try {
-      const response = await axios.put(`/todos/${updatedTodo.id}`, updatedTodo);
+      const response = await axios.put(`/todos/${updatedTask.id}`, updatedTask);
       const data = response.data;
       return data;
     } catch (err) {
@@ -77,3 +90,6 @@ export const updateTodo = createAsyncThunk(
     }
   }
 );
+
+
+//! чиста функція - з одними тимиж даними повертає один і той же результат (приклад цифри)

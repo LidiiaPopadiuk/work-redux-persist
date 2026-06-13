@@ -37,3 +37,38 @@
   height: 24px;
   cursor: pointer;
 }
+
+.btnCheck {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  color: green;
+}
+
+.btnEdit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  color: rgb(95, 95, 253);
+}
+
+.form {
+  display: flex;
+  width: 100%;
+}
