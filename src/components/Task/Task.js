@@ -1,7 +1,7 @@
 import { MdClose, MdEdit } from "react-icons/md";
 import { IoIosCloseCircle, IoMdCheckmark } from "react-icons/io";
 import css from "./Task.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { changeTodo, removeTodo } from "redux/todos/todosSlice";
 import {
   changeTodos,
@@ -10,11 +10,14 @@ import {
 } from "redux/todos/todosOperation";
 import { useState } from "react";
 import { EditForm } from "components/EditForm/EditForm";
+import { selectById } from "redux/todos/todosSlice";
 
 export const Task = ({ task }) => {
   // const [open, isOpen] = useState(false)
+    // const task = useSelector(state => selectById(state, task))
   const dispatch = useDispatch();
   const [isClicked, setIsClicked] = useState(false);
+
 
   const handleChange = () => {
     dispatch(changeTodos({ ...task, completed: !task.completed }));

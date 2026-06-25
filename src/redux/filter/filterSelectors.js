@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-
+import { selectTodos } from "redux/todos/todosSelectors";
 // export const activeTodos = state => {
 //   console.log(state);
 //   return state.todos.todos.filter(todo => todo.completed === false);
@@ -21,12 +21,12 @@ import { createSelector } from "@reduxjs/toolkit";
 //   }
 // };
 
-const selectTodos = state => state.todos.todos;
+// const selectTodos = state => state.todos.todos;
 const selectFilter = state => state.filter;
 export const selectNeededTodos = createSelector(
   [selectTodos, selectFilter],
   (todos, filter) => {
-    console.log("mark")
+    console.log(todos)
     if (filter === "Completed") {
       return todos.filter(todo => todo.completed === true);
     } else if (filter === "Active") {

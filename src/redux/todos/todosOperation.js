@@ -91,5 +91,10 @@ export const updateTodo = createAsyncThunk(
   }
 );
 
+// axios.defaults.baseURL = "https://69ff4c7c2b7ab349602f7904.mockapi.io";
+// const api = axios.create({
+//   baseURL: "......"
+// })
+
 
 //! чиста функція - з одними тимиж даними повертає один і той же результат (приклад цифри)
