@@ -4,6 +4,7 @@
   "description": "",
   "keywords": [],
   "main": "src/index.js",
+  "homepage": "https://lidiiapopadiuk.github.io/work-redux-persist/",
   "dependencies": {
     "@redux-devtools/extension": "3.2.3",
     "@reduxjs/toolkit": "^2.11.2",
