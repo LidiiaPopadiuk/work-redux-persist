@@ -1,20 +1,31 @@
-import { AppBar } from "components/AppBar/AppBar";
 import { Layout } from "components/Layout/Layout";
-import { TaskForm } from "components/TaskForm/TaskForm";
-import { TaskList } from "components/TaskList/TaskList";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { fetchTodos } from "redux/todos/todosOperation";
+import { AuthPage } from "pages/AuthPage";
+import { ListPage } from "pages/ListPage";
+import { Route } from "react-router-dom";
+import { Routes } from "react-router";
+import { PublicRoutes } from "utils/routes/PublicRoutes";
+import { PrivateRoute } from "utils/routes/PrivateRoute";
 export const App = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchTodos());
-  });
   return (
     <Layout>
-      <AppBar />
-      <TaskForm />
-      <TaskList />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <PublicRoutes restricted>
+              <AuthPage />
+            </PublicRoutes>
+          }
+        />
+        <Route
+          path="/list"
+          element={
+            <PrivateRoute>
+              <ListPage />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
     </Layout>
   );
 };

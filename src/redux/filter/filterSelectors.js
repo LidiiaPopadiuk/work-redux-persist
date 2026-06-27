@@ -24,7 +24,7 @@ import { selectTodos } from "redux/todos/todosSelectors";
 // const selectTodos = state => state.todos.todos;
 const selectFilter = state => state.filter;
 export const selectNeededTodos = createSelector(
-  [selectTodos, selectFilter],
+  [selectTodos, selectFilter], //! це воно не перерендюється якщо дві залежності не викликаюьбся і чи якщо одна викликається а інша ні то воно буде працювати чи ні
   (todos, filter) => {
     console.log(todos)
     if (filter === "Completed") {

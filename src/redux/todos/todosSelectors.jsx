@@ -2,6 +2,8 @@ import { createSelector } from "@reduxjs/toolkit";
 import { selectAll } from "./todosSlice";
 
 export const selectTodos = (state) => selectAll(state);
+// export const selectTodos = (state) => state.todos.todos;
+
 
 export const selectCount = createSelector(
     [selectTodos],

@@ -1,15 +1,22 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://69ff4c7c2b7ab349602f7904.mockapi.io";
+axios.defaults.baseURL = "http://localhost:3001";
+
+const getAuthHeader = (token) => {
+  return { Authorization: `Bearer ${token}` };
+};
+console.log(localStorage.getItem("token"));
 
 export const fetchTodos = createAsyncThunk(
   "todos/fetchTodos",
   async (__, thunkAPI) => {
     try {
-      const fetchTodos = await axios.get("/todos");
+      const fetchTodos = await axios.get("/todos", {
+        headers: getAuthHeader(thunkAPI.getState().user.token),
+      });
       const data = fetchTodos.data;
-      console.log(data);
+      console.log(thunkAPI.getState());
 
       return data;
     } catch (err) {
@@ -22,7 +29,9 @@ export const removeTodos = createAsyncThunk(
   "todos/removeTodos",
   async (todoId, thunkAPI) => {
     try {
-      const response = await axios.delete(`/todos/${todoId}`);
+      const response = await axios.delete(`/todos/${todoId}`, {
+        headers: getAuthHeader(),
+      });
       const data = response.data;
       console.log(data);
 
@@ -37,7 +46,9 @@ export const addTodos = createAsyncThunk(
   "todos/addTodos",
   async (pokemonData, thunkAPI) => {
     try {
-      const fetchTodos = await axios.post(`/todos`, pokemonData);
+      const fetchTodos = await axios.post(`/todos`, pokemonData, {
+        headers: getAuthHeader(),
+      });
       console.log(pokemonData);
 
       const data = fetchTodos.data;
@@ -45,7 +56,7 @@ export const addTodos = createAsyncThunk(
 
       return data;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.massage);
+      return thunkAPI.rejectWithValue(err.message);
     }
   }
 );
@@ -54,13 +65,17 @@ export const changeTodos = createAsyncThunk(
   "todos/changeTodo",
   async (changedTodo, thunkAPI) => {
     try {
-      const response = await axios.put(`/todos/${changedTodo.id}`, changedTodo); //! записуємо в базу даних і робитьься рефеч
+      const response = await axios.put(
+        `/todos/${changedTodo.id}`,
+        changedTodo,
+        { headers: getAuthHeader() }
+      ); //! записуємо в базу даних і робитьься рефеч
       const data = response.data;
       console.log(data);
 
       return data;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.massage);
+      return thunkAPI.rejectWithValue(err.message);
     }
   }
 );
@@ -86,7 +101,7 @@ export const updateTodo = createAsyncThunk(
       const data = response.data;
       return data;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.massage);
+      return thunkAPI.rejectWithValue(err.message);
     }
   }
 );
@@ -95,6 +110,5 @@ export const updateTodo = createAsyncThunk(
 // const api = axios.create({
 //   baseURL: "......"
 // })
-
 
 //! чиста функція - з одними тимиж даними повертає один і той же результат (приклад цифри)
